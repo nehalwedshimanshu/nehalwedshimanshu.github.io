@@ -152,13 +152,20 @@
   function unload(k){ const v = vids[k]; if(v.getAttribute('src')){ v.pause(); v.removeAttribute('src'); v.load(); } }
   function playCur(){
     if(!started) return;
-    const v = vids[cur]; load(cur);
+    const v = vids[cur]; load(cur); v._real = true;
     try{ if(v.readyState > 0) v.currentTime = 0; }catch(e){}
     const pr = v.play(); if(pr && pr.catch) pr.catch(() => {});
     clearTimeout(fbTimer);                       // if it still isn't playing, show the finished page instead of an empty first frame
     fbTimer = setTimeout(() => { if(v.paused || v.currentTime < 0.05) setFallback(cur, true); }, 3000);
   }
   let fbTimer = null;
+  // iOS only lets a video start by itself after that element has been played from a real touch,
+  // so 'prime' elements inside the gesture (play, then pause unless the page really wants it playing)
+  function prime(i){
+    const v = vids[i]; load(i); v._real = (i === cur && started && v._real);
+    let pr; try{ pr = v.play(); }catch(e){}
+    if(pr && pr.then) pr.then(() => { if(!v._real) v.pause(); }).catch(() => {});
+  }
   function setFallback(k, on){ const img = pagesEl.children[k].querySelector('.poster'); img.src = 'p'+(k+1) + (on ? '_end' : '') + '.jpg'; vids[k].style.visibility = on ? 'hidden' : ''; }
   vids.forEach((v,i) => {
     v.addEventListener('playing', () => { if(i === cur){ clearTimeout(fbTimer); setFallback(i, false); } });
@@ -170,14 +177,14 @@
     pagesEl.style.transition = instant ? 'none' : '';
     pagesEl.style.transform = 'translateY(' + (-k * H) + 'px)';
     dots.forEach((d,i) => d.classList.toggle('on', i === k));
-    vids.forEach((v,i) => { if(Math.abs(i - k) <= 1) load(i); else unload(i); if(i !== k) v.pause(); });
+    vids.forEach((v,i) => { if(!started ? Math.abs(i - k) <= 1 : true) load(i); if(i !== k) v.pause(); });
     clearTimeout(playTimer);
     playTimer = setTimeout(playCur, instant ? 50 : 700);   // start only once the page has settled
     history.replaceState(null,'','#'+(k+1));
   }
   function go(k){
     if(busy || k < 0 || k >= N || k === cur) return;
-    busy = true; hideHint(); show(k); setTimeout(() => busy = false, 800);
+    busy = true; hideHint(); show(k); vids[k]._real = false; prime(k); setTimeout(() => busy = false, 800);
   }
   addEventListener('resize', () => { setH(); show(cur, true); });
 
@@ -271,6 +278,7 @@
   document.getElementById('open').addEventListener('click', () => {
     started = true; document.getElementById('splash').classList.add('hide');
     setTimeout(() => document.getElementById('splash').remove(), 700);
+    vids.forEach((v,i) => { if(i !== cur) prime(i); });   // unlock every clip while we have this tap
     tryMusic(); playCur(); paintSnd();
   });
 
