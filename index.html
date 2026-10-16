@@ -9,18 +9,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root{--ink:#6b2b3a;--pink:#f4d6d9;--pink2:#fbe9e8;--pink3:#eab9c0;--gold:#c8a45c;--soft:#8a6a70;--paper:#fffaf3}
+  :root{--h:100vh;--ink:#6b2b3a;--pink:#f4d6d9;--pink2:#fbe9e8;--pink3:#eab9c0;--gold:#c8a45c;--soft:#8a6a70;--paper:#fffaf3}
   *{box-sizing:border-box}
   html,body{margin:0;height:100%;background:#1c1014;overflow:hidden;overscroll-behavior:none;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;font-family:'Jost',system-ui,sans-serif}
   #pages{position:fixed;left:0;top:0;width:100%;height:100%;touch-action:none;transition:transform .75s cubic-bezier(.65,.05,.25,1);will-change:transform}
-  .page{position:relative;width:100%;height:100vh;height:100dvh;overflow:hidden;background:#1c1014}
-  .page .bg{position:absolute;inset:-6%;background-size:cover;background-position:center;filter:blur(26px) brightness(.8)}
-  .page video,.page .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+  .page{position:relative;width:100%;height:var(--h);overflow:hidden;background:#1c1014}
+  .page .bg{position:absolute;top:-6%;left:-6%;right:-6%;bottom:-6%;background-size:cover;background-position:center;filter:blur(26px) brightness(.8)}
+  .page video,.page .poster{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain}
   .page video{background:transparent}
-  .zoom{position:absolute;inset:0;transform-origin:0 0;will-change:transform}
+  .zoom{position:absolute;top:0;left:0;right:0;bottom:0;transform-origin:0 0;will-change:transform}
 
   /* top-right controls */
-  .top{position:fixed;top:calc(12px + env(safe-area-inset-top));right:12px;z-index:20;display:flex;flex-direction:column;gap:10px}
+  .top{position:fixed;top:calc(12px + env(safe-area-inset-top));right:12px;z-index:20;display:flex;flex-direction:column}
+  .top .round+.round{margin-top:10px}
   .round{width:44px;height:44px;border-radius:50%;border:1px solid var(--gold);background:linear-gradient(180deg,#fff6f4,var(--pink));color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;box-shadow:0 3px 12px rgba(0,0,0,.25),inset 0 0 0 2px rgba(255,255,255,.5)}
   .round svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
   .round:active{transform:scale(.94)}
@@ -30,13 +31,13 @@
   /* menu button */
   :root{--ink:#6b2b3a;--rose:#e9c9cc;--rose2:#f6e3e1;--sage:#d5e2d1;--lav:#e3dcf0;--butter:#f7ecc9;--paper:#fffaf3;--gold:#c8a45c;--soft:#8a6a70}
 
-  #sheetBg{position:fixed;inset:0;background:rgba(58,30,38,.5);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);display:none;z-index:6;align-items:flex-end;justify-content:center}
+  #sheetBg{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(58,30,38,.5);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);display:none;z-index:6;align-items:flex-end;justify-content:center}
   #sheetBg.open{display:flex}
   
   #sheet{position:relative;width:100%;min-width:0;max-width:480px;max-height:90%;overflow:auto;box-sizing:border-box;padding:30px 20px 30px;color:var(--ink);font:400 15px/1.5 'Jost',system-ui,sans-serif;user-select:text;
     background:radial-gradient(circle at 50% -10%,#fff 0,var(--paper) 45%,#fbeee6 100%);border-radius:34px 34px 0 0;border-top:1px solid var(--gold);animation:up .28s ease;scrollbar-width:none}
   #sheet::-webkit-scrollbar{display:none}
-  #sheet::before{content:"";position:absolute;inset:7px 7px 0;border:1px solid rgba(200,164,92,.55);border-bottom:0;border-radius:28px 28px 0 0;pointer-events:none}
+  #sheet::before{content:"";position:absolute;top:7px;left:7px;right:7px;bottom:0;border:1px solid rgba(200,164,92,.55);border-bottom:0;border-radius:28px 28px 0 0;pointer-events:none}
   @keyframes up{from{transform:translateY(60px);opacity:0}to{transform:none;opacity:1}}
   .close{position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:50%;border:1px solid var(--gold);background:var(--rose2);color:var(--ink);font-size:20px;line-height:1;cursor:pointer;padding:0;z-index:2}
   .back{position:absolute;top:16px;left:16px;height:34px;padding:0 14px;border-radius:17px;border:1px solid var(--gold);background:var(--rose2);color:var(--ink);font:500 13px 'Jost',sans-serif;letter-spacing:.06em;cursor:pointer;z-index:2}
@@ -98,10 +99,26 @@
   /* page 7 RSVP call buttons + swipe hint */
   #hint{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:12;color:var(--ink);font:500 12px 'Jost',sans-serif;letter-spacing:.2em;text-transform:uppercase;background:rgba(255,246,244,.92);border:1px solid var(--gold);padding:8px 16px;border-radius:20px;pointer-events:none;animation:bob 1.8s ease-in-out infinite;transition:opacity .4s}
   @keyframes bob{50%{transform:translate(-50%,-6px)}}
+  @supports not (aspect-ratio:1){.card{height:calc((100vw - 90px)/4)}}
+  /* splash */
+  #splash{position:fixed;top:0;left:0;right:0;bottom:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:24px;background:#1c1014 url(p1.jpg) center/cover;transition:opacity .6s}
+  #splash::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(40,20,26,.45)}
+  #splash.hide{opacity:0;pointer-events:none}
+  #splash .card2{position:relative;width:100%;max-width:340px;text-align:center;color:var(--ink);padding:38px 24px 30px;border-radius:30px;border:1px solid var(--gold);background:radial-gradient(circle at 50% -10%,#fff 0,#fffaf3 50%,#fbe9e8 100%);box-shadow:0 20px 60px rgba(0,0,0,.45)}
+  #splash .card2::before{content:"";position:absolute;top:6px;left:6px;right:6px;bottom:6px;border:1px solid rgba(200,164,92,.5);border-radius:25px;pointer-events:none}
+  #splash small{display:block;font:400 11px 'Jost',sans-serif;letter-spacing:.32em;text-transform:uppercase;color:var(--soft)}
+  #splash h1{margin:8px 0 0;font:italic 500 38px/1.1 'Cormorant Garamond',Georgia,serif}
+  #splash .orn{display:flex;align-items:center;justify-content:center;margin:12px 0 18px;color:var(--gold)}
+  #splash .orn::before,#splash .orn::after{content:"";height:1px;width:50px;background:linear-gradient(90deg,transparent,var(--gold));margin:0 10px}
+  #splash .orn::after{transform:scaleX(-1)}
+  #splash .go{display:inline-block;border:1px solid var(--gold);background:linear-gradient(180deg,#fff2ef,var(--pink));color:var(--ink);padding:14px 30px;border-radius:28px;font:500 14px 'Jost',sans-serif;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;box-shadow:0 4px 14px rgba(107,43,58,.2);animation:glow 2.4s infinite}
+  @keyframes glow{0%{box-shadow:0 4px 14px rgba(107,43,58,.2),0 0 0 0 rgba(200,164,92,.7)}70%,100%{box-shadow:0 4px 14px rgba(107,43,58,.2),0 0 0 14px rgba(200,164,92,0)}}
+  #splash .snd{margin-top:14px;font:400 12px 'Jost',sans-serif;color:var(--soft);letter-spacing:.06em}
 </style>
 </head>
 <body>
 <div id="pages"></div>
+<div id="splash"><div class="card2"><small>With love</small><h1>Nehal &amp; Himanshu</h1><div class="orn">❖</div><button class="go" id="open">Open Invitation</button><div class="snd">🔊 Best with sound on</div></div></div>
 <div id="dots"></div>
 <div id="hint">Swipe up &#8593;</div>
 
@@ -117,13 +134,15 @@
 <script>
   const N = 7;
   const pagesEl = document.getElementById('pages'), dotsEl = document.getElementById('dots');
-  let cur = 0, busy = false, playTimer = null;
+  let cur = 0, busy = false, playTimer = null, started = false, H = innerHeight;
+  function setH(){ H = innerHeight; document.documentElement.style.setProperty('--h', H + 'px'); }
+  setH();
 
   /* ---------- build pages ---------- */
   for(let k = 1; k <= N; k++){
     const p = document.createElement('section'); p.className = 'page';
     p.innerHTML = '<div class="bg" style="background-image:url(p'+k+'.jpg)"></div><div class="zoom"><img class="poster" src="p'+k+'.jpg" alt="" draggable="false">' +
-      '<video muted loop playsinline preload="none" poster="p'+k+'.jpg"></video></div>';
+      '<video muted loop playsinline webkit-playsinline preload="none" poster="p'+k+'.jpg"></video></div>';
     pagesEl.appendChild(p);
     const d = document.createElement('i'); d.onclick = () => go(k-1); dotsEl.appendChild(d);
   }
@@ -132,15 +151,24 @@
   function load(k){ const v = vids[k]; if(!v.getAttribute('src')){ v.src = 'p'+(k+1)+'.mp4'; v.preload = 'auto'; } }
   function unload(k){ const v = vids[k]; if(v.getAttribute('src')){ v.pause(); v.removeAttribute('src'); v.load(); } }
   function playCur(){
+    if(!started) return;
     const v = vids[cur]; load(cur);
-    v.currentTime = 0; const pr = v.play(); if(pr) pr.catch(() => {});
+    try{ if(v.readyState > 0) v.currentTime = 0; }catch(e){}
+    const pr = v.play(); if(pr && pr.catch) pr.catch(() => {});
+    clearTimeout(fbTimer);                       // if it still isn't playing, show the finished page instead of an empty first frame
+    fbTimer = setTimeout(() => { if(v.paused || v.currentTime < 0.05) setFallback(cur, true); }, 3000);
   }
+  let fbTimer = null;
+  function setFallback(k, on){ const img = pagesEl.children[k].querySelector('.poster'); img.src = 'p'+(k+1) + (on ? '_end' : '') + '.jpg'; vids[k].style.visibility = on ? 'hidden' : ''; }
+  vids.forEach((v,i) => {
+    v.addEventListener('playing', () => { if(i === cur){ clearTimeout(fbTimer); setFallback(i, false); } });
+    v.addEventListener('canplay', () => { if(started && i === cur && v.paused && !document.hidden) v.play().catch(() => {}); });
+  });
   function show(k, instant){
     resetZ(false);
     cur = k;
     pagesEl.style.transition = instant ? 'none' : '';
-    pagesEl.style.transform = 'translateY(' + (-k * 100) + 'dvh)';
-    if(!CSS.supports('height','100dvh')) pagesEl.style.transform = 'translateY(' + (-k * innerHeight) + 'px)';
+    pagesEl.style.transform = 'translateY(' + (-k * H) + 'px)';
     dots.forEach((d,i) => d.classList.toggle('on', i === k));
     vids.forEach((v,i) => { if(Math.abs(i - k) <= 1) load(i); else unload(i); if(i !== k) v.pause(); });
     clearTimeout(playTimer);
@@ -151,7 +179,7 @@
     if(busy || k < 0 || k >= N || k === cur) return;
     busy = true; hideHint(); show(k); setTimeout(() => busy = false, 800);
   }
-  addEventListener('resize', () => show(cur, true));
+  addEventListener('resize', () => { setH(); show(cur, true); });
 
   /* ---------- input: one gesture = one page ---------- */
   let wheelLock = 0;
@@ -177,6 +205,7 @@
   const inUI = e => e.target.closest && e.target.closest('#sheetBg');
   addEventListener('touchstart', e => {
     if(inUI(e)) return; lastTouch = Date.now(); hideHint();
+    if(started && vids[cur].paused && !document.hidden) playCur();
     if(e.touches.length === 2){ mode = 'pinch'; p0 = {d:dist(e.touches), s:Z.s, x:Z.x, y:Z.y, m:mid(e.touches)}; }
     else if(e.touches.length === 1){ mode = Z.s > 1 ? 'pan' : 'swipe'; tx = e.touches[0].clientX; ty = e.touches[0].clientY; base = {x:Z.x, y:Z.y}; }
   }, {passive:true});
@@ -238,7 +267,12 @@
   addEventListener('pagehide', bgPause);
   addEventListener('pageshow', e => { if(e.persisted) fgResume(); });
   music.addEventListener('play', paintSnd); music.addEventListener('pause', paintSnd);
-  tryMusic(); paintSnd();
+  paintSnd();
+  document.getElementById('open').addEventListener('click', () => {
+    started = true; document.getElementById('splash').classList.add('hide');
+    setTimeout(() => document.getElementById('splash').remove(), 700);
+    tryMusic(); playCur(); paintSnd();
+  });
 
   /* ---------- menu ---------- */
   const bg = document.getElementById('sheetBg'), sheet = document.getElementById('sheet');
