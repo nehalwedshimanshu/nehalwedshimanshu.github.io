@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Nehal & Himanshu – Wedding Invitation</title>
-<meta property="og:title" content="Nehal & Himanshu – Wedding Invitation">
-<meta property="og:image" content="https://nehalwedshimanshu.github.io/p1.jpg">
+<title>Himanshu & Nehal – Wedding Invitation</title>
+<meta property="og:title" content="Himanshu & Nehal – Wedding Invitation">
+<meta property="og:image" content="https://nehalwedshimanshu.github.io/invite/p1.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -104,7 +104,7 @@
   @keyframes bob{50%{transform:translate(-50%,-6px)}}
   @supports not (aspect-ratio:1){.card{height:calc((100vw - 90px)/4)}}
   /* splash */
-  #splash{position:fixed;top:0;left:0;right:0;bottom:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:24px;background:#1c1014 url(../p1.jpg) center/cover;transition:opacity .6s}
+  #splash{position:fixed;top:0;left:0;right:0;bottom:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:24px;background:#1c1014 url(p1.jpg) center/cover;transition:opacity .6s}
   #splash::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(40,20,26,.45)}
   #splash.hide{opacity:0;pointer-events:none}
   #splash .card2{position:relative;width:100%;max-width:340px;text-align:center;color:var(--ink);padding:38px 24px 30px;border-radius:30px;border:1px solid var(--gold);background:radial-gradient(circle at 50% -10%,#fff 0,#fffaf3 50%,#fbe9e8 100%);box-shadow:0 20px 60px rgba(0,0,0,.45)}
@@ -121,7 +121,7 @@
 </head>
 <body>
 <div id="pages"></div>
-<div id="splash"><div class="card2"><small>With love</small><h1>Nehal &amp; Himanshu</h1><div class="orn">❖</div><button class="go" id="open">Open Invitation</button><div class="snd">🔊 Best with sound on</div></div></div>
+<div id="splash"><div class="card2"><small>With love</small><h1>Himanshu &amp; Nehal</h1><div class="orn">❖</div><button class="go" id="open">Open Invitation</button><div class="snd">🔊 Best with sound on</div></div></div>
 <div id="dots"></div>
 <div id="hint"></div>
 
@@ -135,7 +135,7 @@
 <div id="ytwrap" style="position:fixed;left:0;bottom:0;width:200px;height:200px;opacity:0;pointer-events:none;z-index:-1"><div id="ytp"></div></div>
 
 <script>
-  const N = 7, A = '../';
+  const N = 7, A = '';
   const pagesEl = document.getElementById('pages'), dotsEl = document.getElementById('dots');
   let cur = 0, busy = false, playTimer = null, started = false, H = innerHeight;
   function setH(){ H = innerHeight; document.documentElement.style.setProperty('--h', H + 'px'); }
@@ -331,11 +331,12 @@
   const VENUE = 'Jaypee Greens Golf & Spa Resort, Greater Noida';
   // [title, venue spot, card page, start (UTC), hours, label]
   const EVENTS = [
-    ['Mehendi – Sunshine Carnival','Spa Garden',3,'20261120T063000Z',4,'Fri 20 Nov · 12:00 pm'],
-    ['Tilak & Ring Ceremony','Royal Ballroom',4,'20261120T133000Z',2,'Fri 20 Nov · 7:00 pm'],
-    ['The Musical Soirée','Royal Ballroom',4,'20261120T153000Z',3,'Fri 20 Nov · 9:00 pm'],
+    ['Mehendi – Rang Lagya Ishq Da','Spa Garden',3,'20261120T063000Z',4,'Fri 20 Nov · 12:00 pm'],
+    ['Shagun, Engagement & Cocktail Party','Royal Ballroom',4,'20261120T133000Z',4,'Fri 20 Nov · 7:00 pm'],
     ['Haldi – Tales of Joy','Spa Garden',5,'20261121T050000Z',3,'Sat 21 Nov · 10:30 am'],
-    ['Wedding – Nehal & Himanshu','Royal Garden',6,'20261121T133000Z',4,'Sat 21 Nov · 7:00 pm'],
+    ['Sehra Bandi','Royal Garden',6,'20261121T113000Z',1,'Sat 21 Nov · 5:00 pm'],
+    ['Departure of Baraat','Royal Garden',6,'20261121T123000Z',1,'Sat 21 Nov · 6:00 pm'],
+    ['Dinner','Royal Garden',6,'20261121T153000Z',2,'Sat 21 Nov · 9:00 pm'],
   ];
   const pad = n => String(n).padStart(2,'0');
   function addHours(s,h){
@@ -349,14 +350,14 @@
     lines.push('END:VCALENDAR');
     const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([lines.join('\r\n')],{type:'text/calendar'}));
-    a.download = list.length > 1 ? 'nehal-himanshu-wedding.ics' : 'event.ics';
+    a.download = list.length > 1 ? 'himanshu-nehal-wedding.ics' : 'event.ics';
     document.body.appendChild(a); a.click(); a.remove();
   }
   let timer = null;
   const head = (t,k,back) => (back ? '<button class="back" data-a="home">‹ Back</button>' : '') +
     '<button class="close" data-a="close" aria-label="Close">×</button><h2 class="ttl"><small>'+(back ? k : 'With love')+'</small>'+t+'</h2>';
   const views = {
-    home: () => head('Nehal & Himanshu','20 – 21 November 2026') +
+    home: () => head('Himanshu & Nehal','20 – 21 November 2026') +
       '<div class="orn">❖</div><div class="grid">'+
       '<a class="tile t1" href="'+MAP+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg>Venue Map</a>'+
       '<button class="tile t2" data-a="events"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Events</button>'+
@@ -364,15 +365,15 @@
       '<button class="tile t4" data-a="rsvp"><svg viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3.5 7l8.5 6.2L20.5 7"/></svg>RSVP</button>'+
       '<button class="tile t5" data-a="game"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M18.5 16.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></svg>Play a little game</button></div>',
     events: () => head('The Celebrations','Events',true) + '<div class="orn">❖</div><div class="sub">'+VENUE+'</div>'+
-      [['Friday, 20 November',0,3],['Saturday, 21 November',3,5]].map(d => '<div class="day">'+d[0]+'</div>'+
-        EVENTS.slice(d[1],d[2]).map((e,j) => { const k = d[1]+j; return '<div class="ev" style="--c:'+['#f3d3d4','#d1e0cd','#ddd3ee','#f4e4b6','#f3d3d4'][k]+'"><div class="t"><b>'+e[0]+'</b><span>'+e[5].split(' · ')[1]+' · '+e[1]+'</span>'+'<br><a href="#" data-a="go" data-p="'+e[2]+'">View card</a>'+'</div>'+
+      [['Friday, 20 November',0,2],['Saturday, 21 November',2,6]].map(d => '<div class="day">'+d[0]+'</div>'+
+        EVENTS.slice(d[1],d[2]).map((e,j) => { const k = d[1]+j; return '<div class="ev" style="--c:'+['#f3d3d4','#d1e0cd','#ddd3ee','#f4e4b6','#f3d3d4','#d1e0cd'][k]+'"><div class="t"><b>'+e[0]+'</b><span>'+e[5].split(' · ')[1]+' · '+e[1]+'</span>'+'<br><a href="#" data-a="go" data-p="'+e[2]+'">View card</a>'+'</div>'+
           '<button class="btn sm" data-a="ics" data-k="'+k+'">+ Calendar</button></div>'; }).join('')).join('')+
       '<div class="center" style="margin-top:14px"><button class="btn" data-a="icsall">Add all events</button><a class="btn alt" href="'+MAP+'" target="_blank" rel="noopener">Open map</a></div>',
-    countdown: () => head('Until We Celebrate','Countdown',true) + '<div class="orn">❖</div><div class="cd" id="cd"></div><div class="note">Saturday, 21 November 2026 · 7:00 pm<br>Royal Garden</div>',
+    countdown: () => head('Until We Celebrate','Countdown',true) + '<div class="orn">❖</div><div class="cd" id="cd"></div><div class="note">Saturday, 21 November 2026 · Sehra Bandi, 5:00 pm<br>Royal Garden</div>',
     rsvp: () => head('Kindly Reply','RSVP',true) + '<div class="orn">❖</div><div class="sub">We would love to celebrate with you</div>'+
-      [['Nitin Gupta','N','919910170370','+91 99101 70370'],['Reena Gupta','R','919811901370','+91 98119 01370']].map(p =>
+      [['Bhupinder Naulay','B','919988297646','+91 99882 97646'],['Bhupinder Naulay','B','919999862643','+91 99998 62643']].map(p =>
         '<div class="who"><div class="av">'+p[1]+'</div><div class="n">'+p[0]+'<small>'+p[3]+'</small></div>'+
-        '<a class="btn sm" href="tel:+'+p[2]+'">Call</a><a class="btn sm alt" href="https://wa.me/'+p[2]+'?text='+encodeURIComponent('Hello! RSVP for Nehal & Himanshu\'s wedding: ')+'" target="_blank" rel="noopener">WhatsApp</a></div>').join(''),
+        '<a class="btn sm" href="tel:+'+p[2]+'">Call</a><a class="btn sm alt" href="https://wa.me/'+p[2]+'?text='+encodeURIComponent('Hello! RSVP for Himanshu & Nehal\'s wedding: ')+'" target="_blank" rel="noopener">WhatsApp</a></div>').join(''),
     game: () => head('Match the Pairs','A little game',true) + '<div class="orn">❖</div><div class="sub" id="moves">Moves: 0</div><div id="board"></div><div class="center"><button class="btn" data-a="game">Shuffle</button></div>',
   };
   function render(v){
@@ -383,7 +384,7 @@
   }
   function tick(){
     const el = document.getElementById('cd'); if(!el) return;
-    let s = Math.floor((new Date('2026-11-21T19:00:00+05:30') - Date.now())/1000);
+    let s = Math.floor((new Date('2026-11-21T17:00:00+05:30') - Date.now())/1000);
     if(s <= 0){ el.innerHTML = '<b style="color:#7a1f3d;font-size:20px">Today is the day! 🎉</b>'; return; }
     const d = Math.floor(s/86400); s %= 86400; const h = Math.floor(s/3600); s %= 3600;
     el.innerHTML = [[d,'days'],[h,'hours'],[Math.floor(s/60),'mins'],[s%60,'secs']].map(x => '<div><b>'+x[0]+'</b><small>'+x[1]+'</small></div>').join('');
