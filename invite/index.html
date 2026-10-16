@@ -132,7 +132,7 @@
   <button class="round" id="fab" aria-label="Open menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
 </div>
 <div id="sheetBg"><div id="sheet"></div></div>
-<div id="ytwrap" style="position:fixed;left:0;bottom:0;width:200px;height:200px;opacity:0;pointer-events:none;z-index:-1"><div id="ytp"></div></div>
+<audio id="music" src="music.m4a" loop preload="auto"></audio>
 
 <script>
   const N = 7, A = '';
@@ -262,42 +262,7 @@
   }
 
   /* ---------- music (one looping track, keeps going between pages) ---------- */
-  const snd = document.getElementById('snd');
-  /* YouTube-backed player that behaves like an <audio> element (play/pause/paused/events) */
-  const YT_ID = '-2w18bd-ZQ4';
-  const music = (function(){
-    let yt = null, ready = false, want = false, vol = 70;
-    const ls = {play:[], pause:[]};
-    const m = {
-      paused: true,
-      play(){ want = true; if(ready){ try{ yt.setVolume(vol); yt.playVideo(); }catch(e){} } return Promise.resolve(); },
-      pause(){ want = false; if(ready){ try{ yt.pauseVideo(); }catch(e){} } m.paused = true; ls.pause.forEach(f => f()); },
-      addEventListener(t, f){ if(ls[t]) ls[t].push(f); }
-    };
-    function state(e){
-      const S = e.data;
-      if(S === 1){ if(m.paused){ m.paused = false; ls.play.forEach(f => f()); } }
-      else if(S === 2 || S === 5 || S === -1){ if(!m.paused){ m.paused = true; ls.pause.forEach(f => f()); } }
-      else if(S === 0){ try{ yt.seekTo(0); yt.playVideo(); }catch(err){} }
-    }
-    window.onYouTubeIframeAPIReady = function(){
-      yt = new YT.Player('ytp', {
-        width: '200', height: '200', videoId: YT_ID,
-        playerVars: {playsinline:1, controls:0, disablekb:1, fs:0, rel:0, modestbranding:1, loop:1, playlist:YT_ID},
-        events: {
-          onReady(){ ready = true; if(want){ try{ yt.setVolume(vol); yt.playVideo(); }catch(e){} } },
-          onStateChange: state
-        }
-      });
-    };
-    const tag = document.createElement('script'); tag.src = 'https://www.youtube.com/iframe_api'; document.head.appendChild(tag);
-    /* if autoplay was blocked, retry on the next touch */
-    ['pointerdown','touchend','click'].forEach(ev => addEventListener(ev, e => {
-      if(e.target && e.target.closest && e.target.closest('#snd')) return;
-      if(want && m.paused && ready){ try{ yt.playVideo(); }catch(err){} }
-    }, {passive:true}));
-    return m;
-  })();
+  const music = document.getElementById('music'), snd = document.getElementById('snd');
   let musicOn = true; try{ musicOn = localStorage.getItem('nh-music') !== 'off'; }catch(e){}
   function paintSnd(){ snd.classList.toggle('off', !musicOn || music.paused); }
   function tryMusic(){ if(musicOn && music.paused) music.play().then(paintSnd).catch(() => {}); }
