@@ -97,7 +97,10 @@
   #dots i.on{background:var(--pink3);height:20px;border-radius:5px;border-color:var(--gold)}
 
   /* page 7 RSVP call buttons + swipe hint */
-  #hint{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:12;color:var(--ink);font:500 12px 'Jost',sans-serif;letter-spacing:.2em;text-transform:uppercase;background:rgba(255,246,244,.92);border:1px solid var(--gold);padding:8px 16px;border-radius:20px;pointer-events:none;animation:bob 1.8s ease-in-out infinite;transition:opacity .4s}
+  #hint{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:12;color:var(--ink);font:500 12px 'Jost',sans-serif;letter-spacing:.2em;text-transform:uppercase;background:rgba(255,246,244,.92);border:1px solid var(--gold);padding:8px 16px;border-radius:20px;pointer-events:none;opacity:0;transition:opacity .5s}
+  #hint.on{opacity:1;animation:bob 1.8s ease-in-out infinite}
+  #hint.dn.on{animation-name:bobd}
+  @keyframes bobd{50%{transform:translate(-50%,6px)}}
   @keyframes bob{50%{transform:translate(-50%,-6px)}}
   @supports not (aspect-ratio:1){.card{height:calc((100vw - 90px)/4)}}
   /* splash */
@@ -120,7 +123,7 @@
 <div id="pages"></div>
 <div id="splash"><div class="card2"><small>With love</small><h1>Nehal &amp; Himanshu</h1><div class="orn">❖</div><button class="go" id="open">Open Invitation</button><div class="snd">🔊 Best with sound on</div></div></div>
 <div id="dots"></div>
-<div id="hint">Swipe up &#8593;</div>
+<div id="hint"></div>
 
 <div class="top">
   <button class="round" id="snd" aria-label="Toggle music">
@@ -181,10 +184,11 @@
     clearTimeout(playTimer);
     playTimer = setTimeout(playCur, instant ? 50 : 700);   // start only once the page has settled
     history.replaceState(null,'','#'+(k+1));
+    updateHint();
   }
   function go(k){
     if(busy || k < 0 || k >= N || k === cur) return;
-    busy = true; hideHint(); show(k); vids[k]._real = false; prime(k); setTimeout(() => busy = false, 800);
+    busy = true; if(cur === 0) seen.first = true; if(cur === N-1) seen.last = true; show(k); vids[k]._real = false; prime(k); setTimeout(() => busy = false, 800);
   }
   addEventListener('resize', () => { setH(); show(cur, true); });
 
@@ -211,7 +215,7 @@
   const mid = t => [(t[0].clientX + t[1].clientX)/2, (t[0].clientY + t[1].clientY)/2];
   const inUI = e => e.target.closest && e.target.closest('#sheetBg');
   addEventListener('touchstart', e => {
-    if(inUI(e)) return; lastTouch = Date.now(); hideHint();
+    if(inUI(e)) return; lastTouch = Date.now();
     if(started && vids[cur].paused && !document.hidden) playCur();
     if(e.touches.length === 2){ mode = 'pinch'; p0 = {d:dist(e.touches), s:Z.s, x:Z.x, y:Z.y, m:mid(e.touches)}; }
     else if(e.touches.length === 1){ mode = Z.s > 1 ? 'pan' : 'swipe'; tx = e.touches[0].clientX; ty = e.touches[0].clientY; base = {x:Z.x, y:Z.y}; }
@@ -249,9 +253,13 @@
     if(['ArrowUp','PageUp'].includes(e.key)){ e.preventDefault(); go(cur-1); }
   });
 
-  let hintGone = false;
-  function hideHint(){ if(hintGone) return; hintGone = true; const h = document.getElementById('hint'); h.style.opacity = 0; setTimeout(() => h.remove(), 500); }
-  setTimeout(hideHint, 8000);
+  /* one-time swipe hints: page 1 says swipe up, last page says swipe down; each goes away after the first swipe */
+  const seen = {first:false, last:false}, hintEl = document.getElementById('hint');
+  function updateHint(){
+    const on = started && ((cur === 0 && !seen.first) || (cur === N-1 && !seen.last));
+    if(on) hintEl.innerHTML = cur === 0 ? 'Swipe up &#8593;' : 'Swipe down &#8595;';
+    hintEl.classList.toggle('dn', cur === N-1); hintEl.classList.toggle('on', on);
+  }
 
   /* ---------- music (one looping track, keeps going between pages) ---------- */
   const music = document.getElementById('music'), snd = document.getElementById('snd');
@@ -276,7 +284,7 @@
   music.addEventListener('play', paintSnd); music.addEventListener('pause', paintSnd);
   paintSnd();
   document.getElementById('open').addEventListener('click', () => {
-    started = true; document.getElementById('splash').classList.add('hide');
+    started = true; updateHint(); document.getElementById('splash').classList.add('hide');
     setTimeout(() => document.getElementById('splash').remove(), 700);
     vids.forEach((v,i) => { if(i !== cur) prime(i); });   // unlock every clip while we have this tap
     tryMusic(); playCur(); paintSnd();
