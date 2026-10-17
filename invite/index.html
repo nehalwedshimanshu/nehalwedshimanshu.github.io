@@ -336,7 +336,7 @@
       '<div class="center" style="margin-top:14px"><button class="btn" data-a="icsall">Add all events</button><a class="btn alt" href="'+MAP+'" target="_blank" rel="noopener">Open map</a></div>',
     countdown: () => head('Until We Celebrate','Countdown',true) + '<div class="orn">❖</div><div class="cd" id="cd"></div><div class="note">Saturday, 21 November 2026 · Sehra Bandi, 5:00 pm<br>Royal Garden</div>',
     rsvp: () => head('Kindly Reply','RSVP',true) + '<div class="orn">❖</div><div class="sub">We would love to celebrate with you</div>'+
-      [['Bhupinder Naulay','B','919988297646','+91 99882 97646'],['Bhupinder Naulay','B','919999862643','+91 99998 62643']].map(p =>
+      [['Bhupinder Naulay','B','919988297646','+91 99882 97646'],['Deepanshu Naulay','D','919999862643','+91 99998 62643']].map(p =>
         '<div class="who"><div class="av">'+p[1]+'</div><div class="n">'+p[0]+'<small>'+p[3]+'</small></div>'+
         '<a class="btn sm" href="tel:+'+p[2]+'">Call</a><a class="btn sm alt" href="https://wa.me/'+p[2]+'?text='+encodeURIComponent('Hello! RSVP for Himanshu & Nehal\'s wedding: ')+'" target="_blank" rel="noopener">WhatsApp</a></div>').join(''),
     game: () => head('Match the Pairs','A little game',true) + '<div class="orn">❖</div><div class="sub" id="moves">Moves: 0</div><div id="board"></div><div class="center"><button class="btn" data-a="game">Shuffle</button></div>',
