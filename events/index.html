@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Nehal & Himanshu – Wedding Invitation</title>
+<meta property="og:title" content="Nehal & Himanshu – Wedding Invitation">
+<meta property="og:image" content="https://nehalwedshimanshu.github.io/p1.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--h:100vh;--ink:#6b2b3a;--pink:#f4d6d9;--pink2:#fbe9e8;--pink3:#eab9c0;--gold:#c8a45c;--soft:#8a6a70;--paper:#fffaf3}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:#1c1014;overflow:hidden;overscroll-behavior:none;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;font-family:'Jost',system-ui,sans-serif}
+  #pages{position:fixed;left:0;top:0;width:100%;height:100%;touch-action:none;transition:transform .75s cubic-bezier(.65,.05,.25,1);will-change:transform}
+  .page{position:relative;width:100%;height:var(--h);overflow:hidden;background:#1c1014}
+  .page .bg{position:absolute;top:-6%;left:-6%;right:-6%;bottom:-6%;background-size:cover;background-position:center;filter:blur(26px) brightness(.8)}
+  .page video,.page .poster{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain}
+  .page video{background:transparent}
+  .zoom{position:absolute;top:0;left:0;right:0;bottom:0;transform-origin:0 0;will-change:transform}
+
+  /* top-right controls */
+  .top{position:fixed;top:calc(12px + env(safe-area-inset-top));right:12px;z-index:20;display:flex;flex-direction:column}
+  .top .round+.round{margin-top:10px}
+  .round{width:44px;height:44px;border-radius:50%;border:1px solid var(--gold);background:linear-gradient(180deg,#fff6f4,var(--pink));color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;box-shadow:0 3px 12px rgba(0,0,0,.25),inset 0 0 0 2px rgba(255,255,255,.5)}
+  .round svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .round:active{transform:scale(.94)}
+  #snd .x{display:none}
+  #snd.off .x{display:block}
+
+  /* menu button */
+  :root{--ink:#6b2b3a;--rose:#e9c9cc;--rose2:#f6e3e1;--sage:#d5e2d1;--lav:#e3dcf0;--butter:#f7ecc9;--paper:#fffaf3;--gold:#c8a45c;--soft:#8a6a70}
+
+  #sheetBg{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(58,30,38,.5);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);display:none;z-index:6;align-items:flex-end;justify-content:center}
+  #sheetBg.open{display:flex}
+  
+  #sheet{position:relative;width:100%;min-width:0;max-width:480px;max-height:90%;overflow:auto;box-sizing:border-box;padding:30px 20px 30px;color:var(--ink);font:400 15px/1.5 'Jost',system-ui,sans-serif;user-select:text;
+    background:radial-gradient(circle at 50% -10%,#fff 0,var(--paper) 45%,#fbeee6 100%);border-radius:34px 34px 0 0;border-top:1px solid var(--gold);animation:up .28s ease;scrollbar-width:none}
+  #sheet::-webkit-scrollbar{display:none}
+  #sheet::before{content:"";position:absolute;top:7px;left:7px;right:7px;bottom:0;border:1px solid rgba(200,164,92,.55);border-bottom:0;border-radius:28px 28px 0 0;pointer-events:none}
+  @keyframes up{from{transform:translateY(60px);opacity:0}to{transform:none;opacity:1}}
+  .close{position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:50%;border:1px solid var(--gold);background:var(--rose2);color:var(--ink);font-size:20px;line-height:1;cursor:pointer;padding:0;z-index:2}
+  .back{position:absolute;top:16px;left:16px;height:34px;padding:0 14px;border-radius:17px;border:1px solid var(--gold);background:var(--rose2);color:var(--ink);font:500 13px 'Jost',sans-serif;letter-spacing:.06em;cursor:pointer;z-index:2}
+  .ttl{text-align:center;margin:0;font:italic 500 32px/1.1 'Cormorant Garamond',Georgia,serif;color:var(--ink);padding-top:6px}
+  .ttl small{display:block;font:400 11px 'Jost',sans-serif;letter-spacing:.32em;text-transform:uppercase;color:var(--soft);margin-bottom:6px;font-style:normal}
+  .orn{display:flex;align-items:center;justify-content:center;gap:10px;margin:10px 0 18px;color:var(--gold)}
+  .orn::before,.orn::after{content:"";height:1px;width:56px;background:linear-gradient(90deg,transparent,var(--gold))}
+  .orn::after{transform:scaleX(-1)}
+  .sub{text-align:center;font-size:13px;color:var(--soft);margin:-8px 0 16px;letter-spacing:.03em}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .tile{position:relative;border:1px solid rgba(200,164,92,.7);border-radius:70px 70px 16px 16px;padding:22px 8px 16px;text-align:center;cursor:pointer;font:500 12.5px 'Jost',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);text-decoration:none;display:block;box-shadow:0 4px 14px rgba(107,43,58,.1);transition:transform .15s}
+  .tile:active{transform:scale(.97)}
+  .tile svg{display:block;width:30px;height:30px;margin:0 auto 10px;stroke:var(--ink);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+  .t1{background:linear-gradient(180deg,#fbe9e6,#f3d3d4)}
+  .t2{background:linear-gradient(180deg,#e9f1e5,#d1e0cd)}
+  .t3{background:linear-gradient(180deg,#f1ecf8,#ddd3ee)}
+  .t4{background:linear-gradient(180deg,#fcf4da,#f4e4b6)}
+  .t5{grid-column:span 2;border-radius:16px 16px 16px 16px;background:linear-gradient(90deg,#f3d3d4,#e3dcf0);display:flex;align-items:center;justify-content:center;gap:12px;padding:16px}
+  .t5 svg{margin:0}
+
+  .btn{display:inline-block;border:1px solid var(--gold);background:linear-gradient(180deg,#fff3ee,var(--rose));color:var(--ink);padding:10px 20px;border-radius:22px;font:500 13px 'Jost',sans-serif;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:none;margin:4px 3px;box-shadow:0 2px 8px rgba(107,43,58,.12)}
+  .btn.alt{background:linear-gradient(180deg,#f4faf1,var(--sage))}
+  .btn.sm{padding:7px 13px;font-size:11px;white-space:nowrap}
+  .center{text-align:center}
+
+  .day{display:flex;align-items:center;gap:10px;margin:14px 2px 8px;font:italic 500 21px 'Cormorant Garamond',Georgia,serif;color:var(--ink)}
+  .day::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+  .ev{display:flex;gap:12px;align-items:center;background:#fff;border:1px solid rgba(200,164,92,.45);border-left:5px solid var(--c,var(--rose));border-radius:14px;padding:11px 12px;margin-bottom:9px;box-shadow:0 2px 10px rgba(107,43,58,.07)}
+  .ev .t{flex:1;min-width:0;line-height:1.35}
+  .ev b{display:block;font:600 18px 'Cormorant Garamond',Georgia,serif;color:var(--ink)}
+  .ev span{font-size:13px;color:var(--soft)}
+  .ev a{color:var(--ink);font-size:12px;letter-spacing:.06em}
+
+  .cd{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:6px 0 14px}
+  .cd div{border:1px solid rgba(200,164,92,.7);border-radius:40px 40px 12px 12px;padding:14px 2px 10px;text-align:center}
+  .cd div:nth-child(1){background:linear-gradient(180deg,#fbe9e6,#f3d3d4)}.cd div:nth-child(2){background:linear-gradient(180deg,#e9f1e5,#d1e0cd)}
+  .cd div:nth-child(3){background:linear-gradient(180deg,#f1ecf8,#ddd3ee)}.cd div:nth-child(4){background:linear-gradient(180deg,#fcf4da,#f4e4b6)}
+  .cd b{display:block;font:500 34px/1 'Cormorant Garamond',Georgia,serif;color:var(--ink)}
+  .cd small{font:500 10px 'Jost',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--soft)}
+  .note{text-align:center;font:italic 500 18px 'Cormorant Garamond',Georgia,serif;color:var(--soft)}
+
+  .who{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;background:#fff;border:1px solid rgba(200,164,92,.5);border-radius:18px;padding:14px;margin-bottom:12px;box-shadow:0 2px 10px rgba(107,43,58,.07)}
+  .av{width:54px;height:54px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font:italic 500 26px 'Cormorant Garamond',Georgia,serif;color:var(--ink);border:1px solid var(--gold);background:linear-gradient(135deg,#fbe9e6,#e3dcf0)}
+  .who .n{flex:1 1 140px;min-width:0;font:600 20px 'Cormorant Garamond',Georgia,serif}
+  .who .n small{display:block;font:400 12px 'Jost',sans-serif;color:var(--soft);letter-spacing:.04em}
+
+  #board{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:6px 0 14px}
+  .card{aspect-ratio:1;border-radius:14px;border:1px solid var(--gold);background:radial-gradient(circle at 50% 50%,#f6e3e1 0 28%,#e9c9cc 29% 31%,#f6e3e1 32%);color:var(--ink);font-size:30px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;box-shadow:0 2px 8px rgba(107,43,58,.12)}
+  .card.up{background:#fff}
+  .card.done{background:var(--sage);border-color:#9db79a}
+  .card .f{visibility:hidden}.card.up .f,.card.done .f{visibility:visible}
+
+  /* dots */
+  #dots{position:fixed;right:10px;top:50%;transform:translateY(-50%);z-index:15;display:flex;flex-direction:column;gap:11px}
+  #dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.55);border:1px solid rgba(107,43,58,.4);transition:all .3s;cursor:pointer}
+  #dots i.on{background:var(--pink3);height:20px;border-radius:5px;border-color:var(--gold)}
+
+  /* page 7 RSVP call buttons + swipe hint */
+  #hint{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:12;color:var(--ink);font:500 12px 'Jost',sans-serif;letter-spacing:.2em;text-transform:uppercase;background:rgba(255,246,244,.92);border:1px solid var(--gold);padding:8px 16px;border-radius:20px;pointer-events:none;opacity:0;transition:opacity .5s}
+  #hint.on{opacity:1;animation:bob 1.8s ease-in-out infinite}
+  #hint.dn.on{animation-name:bobd}
+  @keyframes bobd{50%{transform:translate(-50%,6px)}}
+  @keyframes bob{50%{transform:translate(-50%,-6px)}}
+  @supports not (aspect-ratio:1){.card{height:calc((100vw - 90px)/4)}}
+  /* splash */
+  #splash{position:fixed;top:0;left:0;right:0;bottom:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:24px;background:#1c1014 url(../p1.jpg) center/cover;transition:opacity .6s}
+  #splash::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(40,20,26,.45)}
+  #splash.hide{opacity:0;pointer-events:none}
+  #splash .card2{position:relative;width:100%;max-width:340px;text-align:center;color:var(--ink);padding:38px 24px 30px;border-radius:30px;border:1px solid var(--gold);background:radial-gradient(circle at 50% -10%,#fff 0,#fffaf3 50%,#fbe9e8 100%);box-shadow:0 20px 60px rgba(0,0,0,.45)}
+  #splash .card2::before{content:"";position:absolute;top:6px;left:6px;right:6px;bottom:6px;border:1px solid rgba(200,164,92,.5);border-radius:25px;pointer-events:none}
+  #splash small{display:block;font:400 11px 'Jost',sans-serif;letter-spacing:.32em;text-transform:uppercase;color:var(--soft)}
+  #splash h1{margin:8px 0 0;font:italic 500 38px/1.1 'Cormorant Garamond',Georgia,serif}
+  #splash .orn{display:flex;align-items:center;justify-content:center;margin:12px 0 18px;color:var(--gold)}
+  #splash .orn::before,#splash .orn::after{content:"";height:1px;width:50px;background:linear-gradient(90deg,transparent,var(--gold));margin:0 10px}
+  #splash .orn::after{transform:scaleX(-1)}
+  #splash .go{display:inline-block;border:1px solid var(--gold);background:linear-gradient(180deg,#fff2ef,var(--pink));color:var(--ink);padding:14px 30px;border-radius:28px;font:500 14px 'Jost',sans-serif;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;box-shadow:0 4px 14px rgba(107,43,58,.2);animation:glow 2.4s infinite}
+  @keyframes glow{0%{box-shadow:0 4px 14px rgba(107,43,58,.2),0 0 0 0 rgba(200,164,92,.7)}70%,100%{box-shadow:0 4px 14px rgba(107,43,58,.2),0 0 0 14px rgba(200,164,92,0)}}
+  #splash .snd{margin-top:14px;font:400 12px 'Jost',sans-serif;color:var(--soft);letter-spacing:.06em}
+</style>
+</head>
+<body>
+<div id="pages"></div>
+<div id="splash"><div class="card2"><small>With love</small><h1>Nehal &amp; Himanshu</h1><div class="orn">❖</div><button class="go" id="open">Open Invitation</button><div class="snd">🔊 Best with sound on</div></div></div>
+<div id="dots"></div>
+<div id="hint"></div>
+
+<div class="top">
+  <button class="round" id="snd" aria-label="Toggle music">
+    <svg viewBox="0 0 24 24"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/><path class="x" d="M3 3l18 18"/></svg>
+  </button>
+  <button class="round" id="fab" aria-label="Open menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div>
+<div id="sheetBg"><div id="sheet"></div></div>
+<audio id="music" src="../music.m4a" loop preload="auto"></audio>
+
+<script>
+  const PAGES = [1, 2, 4, 6, 7], N = PAGES.length, A = '../';
+  const pagesEl = document.getElementById('pages'), dotsEl = document.getElementById('dots');
+  let cur = 0, busy = false, playTimer = null, started = false, H = innerHeight;
+  function setH(){ H = innerHeight; document.documentElement.style.setProperty('--h', H + 'px'); }
+  setH();
+
+  /* ---------- build pages ---------- */
+  for(let k = 1; k <= N; k++){
+    const p = document.createElement('section'); p.className = 'page';
+    p.innerHTML = '<div class="bg" style="background-image:url('+A+'p'+PAGES[k-1]+'.jpg)"></div><div class="zoom"><img class="poster" src="'+A+'p'+PAGES[k-1]+'.jpg" alt="" draggable="false">' +
+      '<video muted loop playsinline webkit-playsinline preload="none" poster="'+A+'p'+PAGES[k-1]+'.jpg"></video></div>';
+    pagesEl.appendChild(p);
+    const d = document.createElement('i'); d.onclick = () => go(k-1); dotsEl.appendChild(d);
+  }
+  const vids = [...pagesEl.querySelectorAll('video')], dots = [...dotsEl.children];
+
+  function load(k){ const v = vids[k]; if(!v.getAttribute('src')){ v.src = A+'p'+PAGES[k]+'.mp4'; v.preload = 'auto'; } }
+  function unload(k){ const v = vids[k]; if(v.getAttribute('src')){ v.pause(); v.removeAttribute('src'); v.load(); } }
+  function playCur(){
+    if(!started) return;
+    const v = vids[cur]; load(cur); v._real = true;
+    try{ if(v.readyState > 0) v.currentTime = 0; }catch(e){}
+    const pr = v.play(); if(pr && pr.catch) pr.catch(() => {});
+    clearTimeout(fbTimer);                       // if it still isn't playing, show the finished page instead of an empty first frame
+    fbTimer = setTimeout(() => { if(v.paused || v.currentTime < 0.05) setFallback(cur, true); }, 3000);
+  }
+  let fbTimer = null;
+  // iOS only lets a video start by itself after that element has been played from a real touch,
+  // so 'prime' elements inside the gesture (play, then pause unless the page really wants it playing)
+  function prime(i){
+    const v = vids[i]; load(i); v._real = (i === cur && started && v._real);
+    let pr; try{ pr = v.play(); }catch(e){}
+    if(pr && pr.then) pr.then(() => { if(!v._real) v.pause(); }).catch(() => {});
+  }
+  function setFallback(k, on){ const img = pagesEl.children[k].querySelector('.poster'); img.src = A+'p'+PAGES[k] + (on ? '_end' : '') + '.jpg'; vids[k].style.visibility = on ? 'hidden' : ''; }
+  vids.forEach((v,i) => {
+    v.addEventListener('playing', () => { if(i === cur){ clearTimeout(fbTimer); setFallback(i, false); } });
+    v.addEventListener('canplay', () => { if(started && i === cur && v.paused && !document.hidden) v.play().catch(() => {}); });
+  });
+  function show(k, instant){
+    resetZ(false);
+    cur = k;
+    pagesEl.style.transition = instant ? 'none' : '';
+    pagesEl.style.transform = 'translateY(' + (-k * H) + 'px)';
+    dots.forEach((d,i) => d.classList.toggle('on', i === k));
+    vids.forEach((v,i) => { if(!started ? Math.abs(i - k) <= 1 : true) load(i); if(i !== k) v.pause(); });
+    clearTimeout(playTimer);
+    playTimer = setTimeout(playCur, instant ? 50 : 700);   // start only once the page has settled
+    history.replaceState(null,'','#'+(k+1));
+    updateHint();
+  }
+  function go(k){
+    if(busy || k < 0 || k >= N || k === cur) return;
+    busy = true; if(cur === 0) seen.first = true; if(cur === N-1) seen.last = true; show(k); vids[k]._real = false; prime(k); setTimeout(() => busy = false, 800);
+  }
+  addEventListener('resize', () => { setH(); show(cur, true); });
+
+  /* ---------- input: one gesture = one page ---------- */
+  let wheelLock = 0;
+  addEventListener('wheel', e => {
+    if(e.target.closest && e.target.closest('#sheetBg')) return;
+    e.preventDefault();
+    if(e.ctrlKey){ zoomAt(e.clientX, e.clientY, Z.s * Math.exp(-e.deltaY * 0.01)); if(Z.s < 1.02) resetZ(true); return; }   // trackpad pinch / ctrl+wheel
+    if(Z.s > 1){ Z.x -= e.deltaX; Z.y -= e.deltaY; clampZ(); applyZ(false); return; }
+    const now = Date.now(); if(now < wheelLock || Math.abs(e.deltaY) < 8) return;
+    wheelLock = now + 900; go(cur + (e.deltaY > 0 ? 1 : -1));
+  }, {passive:false});
+  /* ---------- pinch-zoom / pan / double-tap zoom (per page) ---------- */
+  const Z = {s:1, x:0, y:0};
+  const zEl = () => pagesEl.children[cur].querySelector('.zoom');
+  function applyZ(anim){ const el = zEl(); el.style.transition = anim ? 'transform .25s ease' : 'none'; el.style.transform = Z.s === 1 ? '' : 'translate('+Z.x+'px,'+Z.y+'px) scale('+Z.s+')'; }
+  function clampZ(){ Z.s = Math.min(5, Math.max(1, Z.s)); Z.x = Math.min(0, Math.max(innerWidth*(1-Z.s), Z.x)); Z.y = Math.min(0, Math.max(innerHeight*(1-Z.s), Z.y)); }
+  function resetZ(anim){ Z.s = 1; Z.x = 0; Z.y = 0; if(pagesEl.children[cur]) applyZ(anim); }
+  function zoomAt(cx, cy, s){ const c0x = (cx - Z.x) / Z.s, c0y = (cy - Z.y) / Z.s; Z.s = s; Z.x = cx - Z.s*c0x; Z.y = cy - Z.s*c0y; clampZ(); if(Z.s === 1){ Z.x = 0; Z.y = 0; } applyZ(false); }
+
+  let ty = 0, tx = 0, mode = '', p0 = null, base = null, lastTap = 0, lastTouch = 0;
+  const dist = t => Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
+  const mid = t => [(t[0].clientX + t[1].clientX)/2, (t[0].clientY + t[1].clientY)/2];
+  const inUI = e => e.target.closest && e.target.closest('#sheetBg');
+  addEventListener('touchstart', e => {
+    if(inUI(e)) return; lastTouch = Date.now();
+    if(started && vids[cur].paused && !document.hidden) playCur();
+    if(e.touches.length === 2){ mode = 'pinch'; p0 = {d:dist(e.touches), s:Z.s, x:Z.x, y:Z.y, m:mid(e.touches)}; }
+    else if(e.touches.length === 1){ mode = Z.s > 1 ? 'pan' : 'swipe'; tx = e.touches[0].clientX; ty = e.touches[0].clientY; base = {x:Z.x, y:Z.y}; }
+  }, {passive:true});
+  addEventListener('touchmove', e => {
+    if(inUI(e)) return; e.preventDefault();
+    if(mode === 'pinch' && e.touches.length === 2){
+      const m = mid(e.touches), s = Math.min(5, Math.max(1, p0.s * dist(e.touches) / p0.d));
+      const c0x = (p0.m[0] - p0.x) / p0.s, c0y = (p0.m[1] - p0.y) / p0.s;
+      Z.s = s; Z.x = m[0] - s*c0x; Z.y = m[1] - s*c0y; clampZ(); applyZ(false);
+    } else if(mode === 'pan' && e.touches.length === 1){
+      Z.x = base.x + e.touches[0].clientX - tx; Z.y = base.y + e.touches[0].clientY - ty; clampZ(); applyZ(false);
+    }
+  }, {passive:false});
+  addEventListener('touchend', e => {
+    if(inUI(e)) return; lastTouch = Date.now();
+    if(mode === 'pinch'){ if(e.touches.length < 2){ if(Z.s < 1.25) resetZ(true); mode = ''; } return; }
+    if(e.target.closest('.round')) { mode = ''; return; }
+    const t = e.changedTouches[0], dy = t.clientY - ty, dx = t.clientX - tx;
+    if(mode === 'swipe' && Math.abs(dy) > 45 && Math.abs(dy) > Math.abs(dx)){ go(cur + (dy < 0 ? 1 : -1)); }
+    else if((mode === 'swipe' || mode === 'pan') && Math.hypot(dx, dy) < 12){            // tap → double-tap toggles zoom
+      const now = Date.now();
+      if(now - lastTap < 320){ lastTap = 0; if(Z.s > 1) resetZ(true); else { zoomAt(t.clientX, t.clientY, 2.5); applyZ(true); } } else lastTap = now;
+    }
+    mode = '';
+  }, {passive:true});
+  addEventListener('dblclick', e => {                                                  // mouse / trackpad
+    if(Date.now() - lastTouch < 700 || inUI(e) || e.target.closest('.round')) return;
+    if(Z.s > 1) resetZ(true); else { zoomAt(e.clientX, e.clientY, 2.5); applyZ(true); }
+  });
+  addEventListener('keydown', e => {
+    if(e.key === 'Escape') return closeSheet();
+    if(bg.classList.contains('open')) return;
+    if(['ArrowDown','PageDown',' '].includes(e.key)){ e.preventDefault(); go(cur+1); }
+    if(['ArrowUp','PageUp'].includes(e.key)){ e.preventDefault(); go(cur-1); }
+  });
+
+  /* one-time swipe hints: page 1 says swipe up, last page says swipe down; each goes away after the first swipe */
+  const seen = {first:false, last:false}, hintEl = document.getElementById('hint');
+  function updateHint(){
+    const on = started && ((cur === 0 && !seen.first) || (cur === N-1 && !seen.last));
+    if(on) hintEl.innerHTML = cur === 0 ? 'Swipe up &#8593;' : 'Swipe down &#8595;';
+    hintEl.classList.toggle('dn', cur === N-1); hintEl.classList.toggle('on', on);
+  }
+
+  /* ---------- music (one looping track, keeps going between pages) ---------- */
+  const music = document.getElementById('music'), snd = document.getElementById('snd');
+  let musicOn = true; try{ musicOn = localStorage.getItem('nh-music') !== 'off'; }catch(e){}
+  function paintSnd(){ snd.classList.toggle('off', !musicOn || music.paused); }
+  function tryMusic(){ if(musicOn && music.paused) music.play().then(paintSnd).catch(() => {}); }
+  snd.addEventListener('click', e => {
+    e.stopPropagation();
+    if(musicOn && !music.paused){ musicOn = false; music.pause(); } else { musicOn = true; music.play().catch(()=>{}); }
+    try{ localStorage.setItem('nh-music', musicOn ? 'on' : 'off'); }catch(err){}
+    paintSnd();
+  });
+  ['pointerdown','touchend','keydown'].forEach(ev => addEventListener(ev, function f(e){
+    if(e.target && e.target.closest && e.target.closest('#snd')) return;
+    tryMusic(); if(musicOn){ ['pointerdown','touchend','keydown'].forEach(x => removeEventListener(x, f)); }
+  }, {passive:true}));
+  function bgPause(){ music.pause(); vids[cur].pause(); }
+  function fgResume(){ if(musicOn) music.play().catch(()=>{}); const v = vids[cur]; if(v.getAttribute('src')) v.play().catch(()=>{}); paintSnd(); }
+  document.addEventListener('visibilitychange', () => document.hidden ? bgPause() : fgResume());
+  addEventListener('pagehide', bgPause);
+  addEventListener('pageshow', e => { if(e.persisted) fgResume(); });
+  music.addEventListener('play', paintSnd); music.addEventListener('pause', paintSnd);
+  paintSnd();
+  document.getElementById('open').addEventListener('click', () => {
+    started = true; updateHint(); document.getElementById('splash').classList.add('hide');
+    setTimeout(() => document.getElementById('splash').remove(), 700);
+    vids.forEach((v,i) => { if(i !== cur) prime(i); });   // unlock every clip while we have this tap
+    tryMusic(); playCur(); paintSnd();
+  });
+
+  /* ---------- menu ---------- */
+  const bg = document.getElementById('sheetBg'), sheet = document.getElementById('sheet');
+  const MAP = 'https://www.google.com/maps/search/?api=1&query=Jaypee+Greens+Golf+and+Spa+Resort+Greater+Noida';
+  const VENUE = 'Jaypee Greens Golf & Spa Resort, Greater Noida';
+  // [title, venue spot, card page, start (UTC), hours, label]
+  const EVENTS = [
+    ['Tilak & Ring Ceremony','Royal Ballroom',3,'20261120T133000Z',2,'Fri 20 Nov · 7:00 pm'],
+    ['The Musical Soirée','Royal Ballroom',3,'20261120T153000Z',3,'Fri 20 Nov · 9:00 pm'],
+    ['Wedding – Nehal & Himanshu','Royal Garden',4,'20261121T133000Z',4,'Sat 21 Nov · 7:00 pm'],
+  ];
+  const pad = n => String(n).padStart(2,'0');
+  function addHours(s,h){
+    const d = new Date(Date.UTC(+s.slice(0,4),+s.slice(4,6)-1,+s.slice(6,8),+s.slice(9,11),+s.slice(11,13)) + h*36e5);
+    return d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate())+'T'+pad(d.getUTCHours())+pad(d.getUTCMinutes())+'00Z';
+  }
+  function ics(list){
+    const lines = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//NehalHimanshuWedding//EN'];
+    list.forEach((e,k) => lines.push('BEGIN:VEVENT','UID:nh-'+k+'-'+e[3]+'@wedding','DTSTAMP:20261001T000000Z',
+      'DTSTART:'+e[3],'DTEND:'+addHours(e[3],e[4]),'SUMMARY:'+e[0],'LOCATION:'+e[1]+'\\, '+VENUE.replace(/,/g,'\\,'),'END:VEVENT'));
+    lines.push('END:VCALENDAR');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([lines.join('\r\n')],{type:'text/calendar'}));
+    a.download = list.length > 1 ? 'nehal-himanshu-wedding.ics' : 'event.ics';
+    document.body.appendChild(a); a.click(); a.remove();
+  }
+  let timer = null;
+  const head = (t,k,back) => (back ? '<button class="back" data-a="home">‹ Back</button>' : '') +
+    '<button class="close" data-a="close" aria-label="Close">×</button><h2 class="ttl"><small>'+(back ? k : 'With love')+'</small>'+t+'</h2>';
+  const views = {
+    home: () => head('Nehal & Himanshu','20 – 21 November 2026') +
+      '<div class="orn">❖</div><div class="grid">'+
+      '<a class="tile t1" href="'+MAP+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg>Venue Map</a>'+
+      '<button class="tile t2" data-a="events"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Events</button>'+
+      '<button class="tile t3" data-a="countdown"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5.2l3.2 2"/></svg>Countdown</button>'+
+      '<button class="tile t4" data-a="rsvp"><svg viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3.5 7l8.5 6.2L20.5 7"/></svg>RSVP</button>'+
+      '<button class="tile t5" data-a="game"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M18.5 16.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></svg>Play a little game</button></div>',
+    events: () => head('The Celebrations','Events',true) + '<div class="orn">❖</div><div class="sub">'+VENUE+'</div>'+
+      [['Friday, 20 November',0,2],['Saturday, 21 November',2,3]].map(d => '<div class="day">'+d[0]+'</div>'+
+        EVENTS.slice(d[1],d[2]).map((e,j) => { const k = d[1]+j; return '<div class="ev" style="--c:'+['#f3d3d4','#ddd3ee','#d1e0cd'][k]+'"><div class="t"><b>'+e[0]+'</b><span>'+e[5].split(' · ')[1]+' · '+e[1]+'</span>'+'<br><a href="#" data-a="go" data-p="'+e[2]+'">View card</a>'+'</div>'+
+          '<button class="btn sm" data-a="ics" data-k="'+k+'">+ Calendar</button></div>'; }).join('')).join('')+
+      '<div class="center" style="margin-top:14px"><button class="btn" data-a="icsall">Add all events</button><a class="btn alt" href="'+MAP+'" target="_blank" rel="noopener">Open map</a></div>',
+    countdown: () => head('Until We Celebrate','Countdown',true) + '<div class="orn">❖</div><div class="cd" id="cd"></div><div class="note">Saturday, 21 November 2026 · 7:00 pm<br>Royal Garden</div>',
+    rsvp: () => head('Kindly Reply','RSVP',true) + '<div class="orn">❖</div><div class="sub">We would love to celebrate with you</div>'+
+      [['Nitin Gupta','N','919910170370','+91 99101 70370'],['Reena Gupta','R','919811901370','+91 98119 01370']].map(p =>
+        '<div class="who"><div class="av">'+p[1]+'</div><div class="n">'+p[0]+'<small>'+p[3]+'</small></div>'+
+        '<a class="btn sm" href="tel:+'+p[2]+'">Call</a><a class="btn sm alt" href="https://wa.me/'+p[2]+'?text='+encodeURIComponent('Hello! RSVP for Nehal & Himanshu\'s wedding: ')+'" target="_blank" rel="noopener">WhatsApp</a></div>').join(''),
+    game: () => head('Match the Pairs','A little game',true) + '<div class="orn">❖</div><div class="sub" id="moves">Moves: 0</div><div id="board"></div><div class="center"><button class="btn" data-a="game">Shuffle</button></div>',
+  };
+  function render(v){
+    clearInterval(timer);
+    sheet.innerHTML = views[v]();
+    if(v === 'countdown') tick(), timer = setInterval(tick,1000);
+    if(v === 'game') startGame();
+  }
+  function tick(){
+    const el = document.getElementById('cd'); if(!el) return;
+    let s = Math.floor((new Date('2026-11-21T19:00:00+05:30') - Date.now())/1000);
+    if(s <= 0){ el.innerHTML = '<b style="color:#7a1f3d;font-size:20px">Today is the day! 🎉</b>'; return; }
+    const d = Math.floor(s/86400); s %= 86400; const h = Math.floor(s/3600); s %= 3600;
+    el.innerHTML = [[d,'days'],[h,'hours'],[Math.floor(s/60),'mins'],[s%60,'secs']].map(x => '<div><b>'+x[0]+'</b><small>'+x[1]+'</small></div>').join('');
+  }
+  function openSheet(){ bg.classList.add('open'); render('home'); }
+  function closeSheet(){ bg.classList.remove('open'); clearInterval(timer); }
+  document.getElementById('fab').addEventListener('click', openSheet);
+  bg.addEventListener('click', e => {
+    if(e.target === bg) return closeSheet();
+    const t = e.target.closest('[data-a]'); if(!t) return;
+    const a = t.dataset.a;
+    if(a === 'go'){ e.preventDefault(); closeSheet(); go(+t.dataset.p - 1); }
+    else if(a === 'close') closeSheet();
+    else if(a === 'ics') ics([EVENTS[+t.dataset.k]]);
+    else if(a === 'icsall') ics(EVENTS);
+    else render(a);
+  });
+
+  /* ---------- memory game ---------- */
+  function startGame(){
+    const icons = ['💍','🛕','🌸','🪔','🎶','✨'];
+    const deck = icons.concat(icons).map(v => ({v,r:Math.random()})).sort((a,b) => a.r-b.r).map(x => x.v);
+    const board = document.getElementById('board'), mv = document.getElementById('moves');
+    let first = null, lock = false, moves = 0, pairs = 0;
+    board.innerHTML = deck.map((v,k) => '<button class="card" data-i="'+k+'"><span class="f">'+v+'</span></button>').join('');
+    board.onclick = e => {
+      const c = e.target.closest('.card');
+      if(!c || lock || c === first || c.classList.contains('done')) return;
+      c.classList.add('up');
+      if(!first){ first = c; return; }
+      mv.textContent = 'Moves: ' + (++moves);
+      if(deck[+first.dataset.i] === deck[+c.dataset.i]){
+        first.classList.replace('up','done'); c.classList.replace('up','done'); first = null;
+        if(++pairs === icons.length) mv.textContent = '🎉 Matched all in ' + moves + ' moves!';
+      } else {
+        lock = true; const f = first; first = null;
+        setTimeout(() => { f.classList.remove('up'); c.classList.remove('up'); lock = false; }, 700);
+      }
+    };
+  }
+
+  show(Math.min(N, Math.max(1, parseInt(location.hash.slice(1)) || 1)) - 1, true);
+</script>
+</body>
+</html>
